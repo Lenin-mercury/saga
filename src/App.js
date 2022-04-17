@@ -4,14 +4,13 @@ import { createStructuredSelector } from "reselect"
 import { fetchUserData } from "./actions/action"
 import "./App.css"
 import { makeSelectLoading, makeSelectUserData } from "./selector"
-
-function App({ fetchUserData, loading, userDatas}) {
-
+import PropTypes from "prop-types"
+function App({ fetchUserDetails, loading, userDatas }) {
   useEffect(() => {
-    fetchUserData()
+    fetchUserDetails()
   })
 
-console.log(loading, userDatas);
+  console.log(loading, userDatas)
 
   return (
     <div className="App">
@@ -22,6 +21,18 @@ console.log(loading, userDatas);
 }
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
-  userDatas: makeSelectUserData(),
+  // userDatas: makeSelectUserData(),
 })
-export default connect(mapStateToProps, { fetchUserData })(App)
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUserDetails: () => dispatch(fetchUserData()),
+})
+App.propTypes = {
+  fetchUserDetails: PropTypes.func,
+}
+
+// Inifinte call loops when stateToProps added
+// uncomment 36 and comment 37 to see the error
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+// export default connect(null, mapDispatchToProps)(App)
+

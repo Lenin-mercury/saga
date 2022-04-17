@@ -4,7 +4,7 @@ import { setLoading, setUserData } from "../actions/action"
 import { GET_USER_REQUEST } from "../actions/actionTypes"
 
 export const getUserData = (response) => {
-  console.log(response)
+  console.log(response.data, "from saga")
   return response
 }
 
