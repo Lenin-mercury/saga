@@ -24,4 +24,4 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   userDatas: makeSelectUserData(),
 })
-export default connect(null, { fetchUserData })(App)
+export default connect(mapStateToProps, { fetchUserData })(App)
